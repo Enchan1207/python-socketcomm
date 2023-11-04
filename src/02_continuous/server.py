@@ -48,11 +48,11 @@ def main() -> int:
     server_sock.close()
     return 0
 
-def client_socket_worker(socket: socket.socket, termination_event: threading.Event):
+def client_socket_worker(client_socket: socket.socket, termination_event: threading.Event):
     """クライアントソケットのワーカスレッド
 
     Args:
-        socket (socket.socket): クライアントソケット
+        client_socket (socket.socket): クライアントソケット
         termination_event (threading.Event): 終了イベント
     """
 
@@ -68,7 +68,7 @@ def client_socket_worker(socket: socket.socket, termination_event: threading.Eve
     interval: float = 0.5
     while not termination_event.wait(interval):
         try:
-            socket.send(lines[current_line].encode())
+            client_socket.send(lines[current_line].encode())
             current_line = (current_line + 1) % max_lines
         except BrokenPipeError as e:
             # ソケットが落ちるとここで例外を吐く
@@ -76,7 +76,7 @@ def client_socket_worker(socket: socket.socket, termination_event: threading.Eve
 
             # クライアントソケットを閉じてスレッドを終了
             print("close client socket...")
-            socket.close()
+            client_socket.close()
             break
 
 if __name__ == "__main__":
