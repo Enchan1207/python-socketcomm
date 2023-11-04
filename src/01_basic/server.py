@@ -5,8 +5,8 @@
 # telnet localhost 8080 でアクセスできる
 #
 
-import sys
 import socket
+import sys
 from datetime import datetime
 
 

@@ -5,9 +5,10 @@
 # telnet localhost 8080 でアクセスできる
 #
 
-import sys
 import socket
+import sys
 import threading
+
 
 def main() -> int:
     # socketオブジェクトの構成
