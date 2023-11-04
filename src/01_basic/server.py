@@ -7,12 +7,13 @@
 
 import sys
 import socket
+from datetime import datetime
 
 
 def main() -> int:
     # socketオブジェクトの生成
     #
-    # AF_INETは「IPv4専用のソケット」, SOCK_STREAMは「TCPによる通信」を表す.
+    # AF_INETは「IPv4専用のソケット」、SOCK_STREAMは「TCPによる通信」を表す。
     # ref:
     #   https://docs.oracle.com/cd/E19253-01/819-0392/sockets-4/index.html
     #   https://docs.oracle.com/cd/E19253-01/819-0392/sockets-18552/index.html
@@ -37,7 +38,7 @@ def main() -> int:
 
     # ソケットのリッスン
     # 
-    # クライアントからの接続を受け入れる。
+    # クライアントからの接続を受け入れる。第一引数はクライアントの同接数設定
     server_sock.listen(5)
 
     # ソケットサーバのメインループ
@@ -50,13 +51,14 @@ def main() -> int:
 
             # クライアントソケットにデータを送信する
             print("send message to client")
-            client_sock.send(b"Hello, World!\n")
+            message = f"Hello, World! now: {datetime.now().isoformat()}\n"
+            client_sock.send(message.encode())
+            
+            # クライアントソケットを閉じる
+            client_sock.close()
         except KeyboardInterrupt:
             # ^Cで終了
             break
-
-        # ソケットを閉じる
-        client_sock.close()
 
     # サーバソケットを閉じる
     print("terminating server...")
