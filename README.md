@@ -10,6 +10,7 @@ Pythonの[`socket`](https://docs.python.org/ja/3/library/socket.html)を用い�
  - 01_basic: 基本的な接続待機とサーバからのメッセージ送信
  - 02_continuous: 複数の接続先に対する非同期かつ連続的なメッセージの送信
  - 03_receive: 単一の接続先とメッセージをやり取り
+ - 04_chat: `select()` を用いたクライアントの多重化とベーシックなチャットサーバ
 
 ## License
 
