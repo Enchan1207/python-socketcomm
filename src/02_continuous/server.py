@@ -19,7 +19,7 @@ def main() -> int:
     host = "localhost"
     port = 8080
     server_sock.bind((host, port))
-    print(f"Server socket is binded at {host}:{port}")
+    print(f"Server socket bound to {host}:{port}")
     server_sock.listen(5)
 
     # ソケットサーバのメインループ
